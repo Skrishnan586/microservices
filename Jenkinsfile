@@ -75,7 +75,7 @@ pipeline {
             steps {
                 sleep(60)
               timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
+                waitForQualityGate abortPipeline: true, credentialsId: 'sonarscanner4'
               }
             }
             post {
@@ -158,7 +158,7 @@ pipeline {
         }
         stage('Approval - Deploy on k8s') {
             steps {
-                input 'Approve for EKS Deploy'
+                input 'Approve for Deploy in K8S'
             }
         }
         stage ('Deploy on k8s'){
