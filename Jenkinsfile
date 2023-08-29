@@ -63,7 +63,7 @@ pipeline {
                                         -D sonar.inclusions=index.py \
                                         -D sonar.sourceEncoding=UTF-8 \
                                         -D sonar.language=python \
-                                        -D sonar.host.url=http://52.66.235.90:9000/"""
+                                        -D sonar.host.url=http://54.157.159.86:9000/"""
                                 }
                             }
                         }
@@ -73,9 +73,9 @@ pipeline {
         }
         stage("Quality Gate") {
             steps {
-                sleep(60)
+                sleep(35)
               timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true, credentialsId: 'sonarscanner4'
+                waitForQualityGate abortPipeline: true, credentialsId: 'sonar'
               }
             }
             post {
@@ -95,7 +95,7 @@ pipeline {
             steps {
                 parallel (
                     'docker login': {
-                        withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
+                        withCredentials([string(credentialsId: 'dockerPassword', variable: 'dockerPassword')]) {
                             sh "docker login -u harikrishnan586 -p ${dockerPassword}"
                         }
                     },
