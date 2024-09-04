@@ -1,4 +1,4 @@
-FROM node:22.5.0
+FROM node:22.8
 RUN echo " Try to build my application"
 COPY . /var/www
 WORKDIR /var/www
